@@ -5,31 +5,45 @@ import CategoryMain from "./categoryForMain"
 import Category from "../categoryPages/category"
 
 import type { Product } from "@/types/prodect"
+import { Categories } from "@/types/category"
 
 type Props = {
     products: Product[]
+    categories: Categories[]
 }
 
-export default function CategoryPages ({ products }: Props) {
-    console.log(products);
-    
-    const searchParams = useSearchParams()
+export default function CategoryPages ({
+    products,
+    categories
+}: Props) {
 
-    const category = searchParams.get('category')
 
-    const pages = {
-        ask: <Category category={category} products={products} />,
-        ecotab: <Category category={category} products={products} />,
-        another: <Category category={category} products={products} />
-    }
+const searchParams = useSearchParams()
+
+const category = searchParams.get('category')
+const search = searchParams.get('search')
+
+const filteredByCategory = category
+? products.filter(p => p.type === category)
+: products
+
+const filteredBySearch = search
+? filteredByCategory.filter(product =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+)
+: filteredByCategory
 
     return (
-        <div className="">
-            {
-                category ?
-                pages[category as keyof typeof pages]
-                : <CategoryMain />
-            }
+        <div>
+        {!category && !search ? (
+                <CategoryMain />
+            ) : (
+                <Category
+                category={category}
+                products={filteredBySearch}
+                categories={categories}
+                />
+            )}
         </div>
     )
 }

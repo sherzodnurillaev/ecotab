@@ -1,11 +1,15 @@
 import CategoryPages from "@/components/mainPage/categoryPages";
-import products from "@/data/products.json"
+import { getCategories } from "@/lib/categories";
+import { getProducts } from "@/lib/products";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts()
+  const categories = await getCategories()
+
   return (
     <div className="">
-      <main className="">
-        <CategoryPages products={products} />
+      <main className="pb-[20px]">
+        <CategoryPages products={products} categories={categories} />
       </main>
     </div>
   );

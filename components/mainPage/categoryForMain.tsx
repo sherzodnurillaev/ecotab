@@ -27,7 +27,7 @@ export default function CategoryMain() {
     ]
 
     const setCategory = (value: string) => {
-        navigate.push(`?category=${value}`)
+        navigate.push(`${ value != 'another' ? `?category=${value}` : 'Universal'}`)
     }
     
     return(

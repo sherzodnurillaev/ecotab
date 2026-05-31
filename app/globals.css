@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
 :root {
-
+  --border-glow: rgba(167, 139, 250, 0.3);
 }
 
 body {
+  min-height: 100vh;
+  background: #fff;
 
+  /* вот этот “бордер-эффект” */
+  box-shadow: inset 0 0 0 1px var(--border-glow);
 }

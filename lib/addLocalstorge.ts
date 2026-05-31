@@ -8,18 +8,18 @@ type CartItem = {
     count: number
 }
 
+export const getCart = (): CartItem[] => {
+    const data = localStorage.getItem('cart')
+
+    return data ? JSON.parse(data) : []
+}
+
 export const addToCart = (product: Product) => {
 
-    const cartData = localStorage.getItem('cart')
-
-    console.log(cartData)
-
-    const cart = cartData
-        ? JSON.parse(cartData)
-        : []
+    const cart = getCart()
 
     const existingItem = cart.find(
-        (item: any) => item.id === product.id
+        item => item.id === product.id
     )
 
     if (existingItem) {
@@ -34,8 +34,40 @@ export const addToCart = (product: Product) => {
         })
     }
 
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
+
+export const increaseCount = (id: number) => {
+    const cart = getCart()
+
+    const item = cart.find(
+        product => product.id === id
+    )
+
+    if (item) {
+        item.count += 1
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
+
+export const decreaseCount = (id: number) => {
+    const cart = getCart()
+
+    const item = cart.find(
+        product => product.id === id
+    )
+
+    if (!item) return
+
+    item.count -= 1
+
+    const updatedCart = cart.filter(
+        product => product.count > 0
+    )
+
     localStorage.setItem(
         'cart',
-        JSON.stringify(cart)
+        JSON.stringify(updatedCart)
     )
 }
