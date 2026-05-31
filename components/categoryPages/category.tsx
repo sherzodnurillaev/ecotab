@@ -95,16 +95,10 @@ export default function Category({ category, products, categories }: CategoryPro
               <h2>{item.name}</h2>
               <p>{item.price} sum</p>
 
-              {/* <div
-                className="bg-green-600 py-1 text-white rounded-2xl text-center"
-                onClick={() => addToCart(item)}
-              >
-                Add+
-              </div> */}
               <div className="">
                 {count === 0 ? (
                   <div onClick={() => handleAdd(item)} className="text-center bg-green-400 text-[#fff] rounded-b-2xl py-[3px] w-[100%]">
-                    Add+
+                    Добавить+
                   </div>
                 ) : (
                   <div className="flex justify-between items-center">

@@ -47,7 +47,7 @@ export default function Header() {
       <div className="relative">
         <input
           type="text"
-          placeholder="search..."
+          placeholder="Поиск..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="bg-[#fff] rounded-2xl text-black px-[10px] py-[5px]"

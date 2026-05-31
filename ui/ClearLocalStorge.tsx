@@ -11,9 +11,9 @@ export default function ClearLocal() {
         <div>
             <button
                 onClick={handleClear}
-                className="bg-green-600 rounded-2xl px-[25px] py-[4px] text-white print:hidden"
+                className="bg-red-600 rounded-2xl px-[15px] py-[4px] text-white print:hidden"
             >
-                Clear
+                Удалить
             </button>
         </div>
     )
