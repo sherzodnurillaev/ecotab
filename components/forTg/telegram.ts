@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 export default function TgDebug() {
   useEffect(() => {
-    console.log('Telegram WebApp:', window.Telegram?.WebApp)
+    console.log('Telegram:', window.Telegram?.WebApp)
   }, [])
 
   return null

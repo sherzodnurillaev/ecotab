@@ -6,8 +6,9 @@ export const getCategories = async () => {
     .select('*')
 
   if (error) {
-    throw new Error(error.message)
+    console.log('Supabase categories error:', error.message)
+    return []
   }
 
-  return data
+  return data ?? []
 }

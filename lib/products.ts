@@ -7,8 +7,9 @@ export const getProducts = async () => {
     .eq('status', true)
 
   if (error) {
-    throw new Error(error.message)
+    console.log('Supabase error:', error.message)
+    return []
   }
 
-  return data
+  return data ?? []
 }
