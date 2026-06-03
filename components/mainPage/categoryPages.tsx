@@ -1,10 +1,49 @@
-import { Suspense } from "react"
-import CategoryPagesClient from "./CategoryPagesClient"
+'use client'
 
-export default function CategoryPages(props: any) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CategoryPagesClient {...props} />
-    </Suspense>
-  )
+import { useSearchParams } from "next/navigation"
+import CategoryMain from "./categoryForMain"
+import Category from "../categoryPages/category"
+
+import type { Product } from "@/types/prodect"
+import { Categories } from "@/types/category"
+
+type Props = {
+    products: Product[]
+    categories: Categories[]
+}
+
+export default function CategoryPages ({
+    products,
+    categories
+}: Props) {
+
+
+const searchParams = useSearchParams()
+
+const category = searchParams.get('category')
+const search = searchParams.get('search')
+
+const filteredByCategory = category
+? products.filter(p => p.type === category)
+: products
+
+const filteredBySearch = search
+? filteredByCategory.filter(product =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+)
+: filteredByCategory
+
+    return (
+        <div>
+        {!category && !search ? (
+                <CategoryMain />
+            ) : (
+                <Category
+                category={category}
+                products={filteredBySearch}
+                categories={categories}
+                />
+            )}
+        </div>
+    )
 }

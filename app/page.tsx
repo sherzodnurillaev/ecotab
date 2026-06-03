@@ -9,7 +9,10 @@ export default async function Home() {
 
   return (
     <main className="pb-[20px]">
-      <CategoryPages products={products} categories={categories} />
+      <Suspense fallback={<div>Loading...</div>}>
+      <h1>new deploy</h1>
+        <CategoryPages products={products} categories={categories} />
+      </Suspense>
     </main>
   )
 }
