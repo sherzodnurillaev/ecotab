@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { Suspense } from "react"
 import CategoryPages from "@/components/mainPage/categoryPages"
 import { getCategories } from "@/lib/categories"
@@ -10,7 +12,6 @@ export default async function Home() {
   return (
     <main className="pb-[20px]">
       <Suspense fallback={<div>Loading...</div>}>
-      <h1>new deploy</h1>
         <CategoryPages products={products} categories={categories} />
       </Suspense>
     </main>
