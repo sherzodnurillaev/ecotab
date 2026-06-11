@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/layout/header/Header";
-import Footer from "@/components/layout/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Ecotab&Așk",
@@ -15,13 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-    >
-      <body className="w-full p-0 pt-21">
-        <Header />
-          {children}
-        <Footer />
+    <html lang="en">
+      <body>
+            {children}
       </body>
     </html>
   );

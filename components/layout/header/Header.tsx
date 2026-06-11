@@ -1,13 +1,14 @@
 'use client'
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Header() {
   const [search, setSearch] = useState('');
   const navigate = useRouter();
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,17 +19,16 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (search.trim()) {
-        navigate.push(`/?search=${search}`);
-      } else {
-        navigate.push(`/`);
-      }
-    }, 700);
+useEffect(() => {
+  if (pathname !== '/') return;
+  if (search === '') return;
 
-    return () => clearTimeout(timer);
-  }, [search, navigate]);
+  const timer = setTimeout(() => {
+    navigate.push(`/?search=${search}`);
+  }, 700);
+
+  return () => clearTimeout(timer);
+}, [search, pathname, navigate]);
 
   return (
     <header className={`text-center pt-[10px] pb-1 text-white rounded-br-[20px] flex justify-between items-center gap-5 px-[15px] fixed top-0 left-0 w-full z-50 transition-all duration-300 print:hidden ${

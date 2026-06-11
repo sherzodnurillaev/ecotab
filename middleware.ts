@@ -1,0 +1,34 @@
+import { NextResponse } from "next/server"
+import { createServerClient } from "@supabase/ssr"
+
+export async function middleware(req: any) {
+  const res = NextResponse.next()
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll()
+        },
+        setAll(cookies) {
+          cookies.forEach(({ name, value }) => {
+            req.cookies.set(name, value)
+            res.cookies.set(name, value)
+          })
+        },
+      },
+    }
+  )
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user && req.nextUrl.pathname.startsWith("/admin")) {
+    return NextResponse.redirect(new URL("/login", req.url))
+  }
+
+  return res
+}

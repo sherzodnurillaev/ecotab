@@ -10,7 +10,7 @@ export default async function Home() {
   const categories = await getCategories()
 
   return (
-    <main className="pb-[20px]">
+    <main className="pb-[20px] w-full p-0 pt-21">
       <Suspense fallback={<div>Loading...</div>}>
         <CategoryPages products={products} categories={categories} />
       </Suspense>
