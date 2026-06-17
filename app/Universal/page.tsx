@@ -34,7 +34,7 @@ export default function Universal() {
     }
 
     return(
-        <div className="flex flex-wrap justify-between gap-[15px] items-center p-[25px]">
+        <div className="flex flex-wrap justify-between gap-[15px] items-center mt-[80px] p-[25px]">
             {categories
                 .filter(item =>
                     item.type !== "ask" &&
